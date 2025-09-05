@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f4f4f9;
+}
+
+.main {
+    min-height: 100vh;
+    margin-bottom: 0px;
+    background-color: rgb(22, 22, 74);
+    border-color: aqua;
+    position: relative;
+    border: 1px solid transparent;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 90px;
+    background-color: rgb(22, 22, 74);
+}
+
+.logo {
+    color: #fff;
+    font-size: 35px;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.logo span {
+    color: #6db6b9e6;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #6db6b9e6;
+    transform: scale(1.05);
+}
+
+.boxes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 40px;
+    margin-left: 250px;
+}
+
+.box {
+    background-color: whitesmoke;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+}
+
+.box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.box i {
+    font-size: 35px;
+    color: rgb(22, 22, 74);
+    margin-bottom: 10px;
+}
+
+.box .text {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    text-align: center;
+}
+
+.box strong {
+    margin-top: 10px;
+    font-size: 24px;
+    color: rgb(22, 22, 74);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .boxes {
+        grid-template-columns: repeat(2, 1fr);
+        margin-left: 100px;
+    }
+}
+
+@media (max-width: 768px) {
+    .boxes {
+        grid-template-columns: 1fr;
+        margin-left: 20px;
+    }
+    
+    nav {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+    }
+    
+    nav ul {
+        margin-top: 20px;
+    }
+}

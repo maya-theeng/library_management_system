@@ -1,0 +1,101 @@
+# Admin Table
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `address` text DEFAULT NULL,
+  `mobile` varchar(15) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) 
+
+# Student Register Table
+CREATE TABLE `student_register` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `address` text DEFAULT NULL,
+  `mobile` varchar(15) DEFAULT NULL,
+  `semester` int(11) NOT NULL,
+  `status` int(1) NOT NULL DEFAULT 1 COMMENT '1: active, 0: inactive',
+  `password` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) 
+
+# Book Table
+CREATE TABLE `book` (
+  `bid` int(11) NOT NULL AUTO_INCREMENT,
+  `isbn` varchar(20) NOT NULL,
+  `book_name` varchar(255) NOT NULL,
+  `author_name` varchar(100) NOT NULL,
+  `edition` varchar(50) DEFAULT NULL,
+  `semester` int(11) NOT NULL,
+  `price` decimal(10,2) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `publication` varchar(100) DEFAULT NULL,
+  `publication_date` date DEFAULT NULL,
+  `available` int(1) NOT NULL DEFAULT 1 COMMENT '1: available, 0: not available',
+  PRIMARY KEY (`bid`),
+  UNIQUE KEY `isbn` (`isbn`)
+) 
+
+# Book Request Table
+CREATE TABLE `book_request` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sid` int(11) NOT NULL,
+  `bid` int(11) NOT NULL,
+  `book_name` varchar(255) NOT NULL,
+  `student_name` varchar(100) NOT NULL,
+  `status` varchar(20) NOT NULL DEFAULT 'requested' COMMENT 'requested, accepted, rejected',
+  `request_date` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `sid` (`sid`),
+  KEY `bid` (`bid`),
+  CONSTRAINT `book_request_ibfk_1` FOREIGN KEY (`sid`) REFERENCES `student_register` (`id`),
+  CONSTRAINT `book_request_ibfk_2` FOREIGN KEY (`bid`) REFERENCES `book` (`bid`)
+) 
+
+# Book Issue Table
+CREATE TABLE `book_issue` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sid` int(11) NOT NULL,
+  `bid` int(11) NOT NULL,
+  `book_name` varchar(255) NOT NULL,
+  `student_name` varchar(100) NOT NULL,
+  `issue_date` date NOT NULL,
+  `expected_returndate` date NOT NULL,
+  `remaining_day` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `sid` (`sid`),
+  KEY `bid` (`bid`),
+  CONSTRAINT `book_issue_ibfk_1` FOREIGN KEY (`sid`) REFERENCES `student_register` (`id`),
+  CONSTRAINT `book_issue_ibfk_2` FOREIGN KEY (`bid`) REFERENCES `book` (`bid`)
+) 
+
+# Book Return Table
+CREATE TABLE `book_return` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sid` int(11) NOT NULL,
+  `bid` int(11) NOT NULL,
+  `book_name` varchar(255) NOT NULL,
+  `student_name` varchar(100) NOT NULL,
+  `return_date` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `sid` (`sid`),
+  KEY `bid` (`bid`),
+  CONSTRAINT `book_return_ibfk_1` FOREIGN KEY (`sid`) REFERENCES `student_register` (`id`),
+  CONSTRAINT `book_return_ibfk_2` FOREIGN KEY (`bid`) REFERENCES `book` (`bid`)
+) 
+
+#Notifications Table
+CREATE TABLE `notifications` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sid` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `sid` (`sid`),
+  CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`sid`) REFERENCES `student_register` (`id`) ON DELETE CASCADE
+) 
