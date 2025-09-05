@@ -23,17 +23,7 @@ Frontend: HTML, CSS
  
 Database: MySQL
  
-Others: JavaScript (optional enhancements)
- 
-📂 Project Structure
-library_management_system/
-│── index.php          # Main entry point (login/home page)
-│── register.php       # Student registration page
-│── tables.txt         # Database schema
-│── assets/            # CSS, JS, images
-│── common/            # Shared PHP components (header, footer, db connection)
-│── student/           # Student dashboard, borrow/return pages
- 
+
 ⚙️ Installation & Setup
  
 Clone the repository:
